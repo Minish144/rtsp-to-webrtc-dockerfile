@@ -8,6 +8,8 @@ RUN go mod download
 
 ENV GO111MODULE=on
 
+RUN go build -o start
+
 EXPOSE 8083
 
-CMD go run *.go
+CMD ./start
