@@ -1,4 +1,4 @@
-FROM golang:latest
+FROM golang:latest AS build
 
 WORKDIR /RTSPtoWebRTC
 
@@ -13,6 +13,10 @@ COPY config.json ./
 
 RUN go build -o start
 
+FROM scratch AS bin
+
+COPY --from=build /RTSPtoWebRTC/start /start
+
 EXPOSE 8083
 
-CMD ./start
+CMD /start
